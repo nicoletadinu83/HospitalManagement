@@ -3,6 +3,7 @@ package HospitalManagement.com.HospitalMAnagement.model;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name = "person")
 
 public class PersonModel {
@@ -18,6 +19,9 @@ public class PersonModel {
     private int age;
     private String userID;
     private String password;
+
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    private AddressModel addressModel;
 
     public long getId() {
         return id;
@@ -73,5 +77,13 @@ public class PersonModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public AddressModel getAddressModel() {
+        return addressModel;
+    }
+
+    public void setAddressModel( AddressModel addressModel ) {
+        this.addressModel = addressModel;
     }
 }
