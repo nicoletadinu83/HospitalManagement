@@ -1,27 +1,23 @@
-package HospitalManagement.com.HospitalMAnagement.model;
+package HospitalManagement.com.HospitalMAnagement.dto;
 
-import javax.persistence.*;
+import HospitalManagement.com.HospitalMAnagement.model.AddressModel;
+import HospitalManagement.com.HospitalMAnagement.model.PersonType;
 
-@Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-@Table(name = "person")
+import javax.persistence.CascadeType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 
-public class PersonModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PersonDto {
     private long id;
 
     private String firstName;
     private String lastName;
-
-    @Enumerated(EnumType.STRING)
     private PersonType gender; /* F/M*/
     private int age;
     private String userName;
     private String password;
-
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
-    private AddressModel addressModel;
+    private AddressDto addressDto;
 
     public long getId() {
         return id;
@@ -79,11 +75,11 @@ public class PersonModel {
         this.password = password;
     }
 
-    public AddressModel getAddressModel() {
-        return addressModel;
+    public AddressDto getAddressDto() {
+        return addressDto;
     }
 
-    public void setAddressModel( AddressModel addressModel ) {
-        this.addressModel = addressModel;
+    public void setAddressDto(AddressDto addressDto) {
+        this.addressDto = addressDto;
     }
 }
