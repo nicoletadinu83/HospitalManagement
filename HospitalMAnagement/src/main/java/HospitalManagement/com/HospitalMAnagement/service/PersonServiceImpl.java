@@ -1,4 +1,4 @@
 package HospitalManagement.com.HospitalMAnagement.service;
 
-public class PersonServiceImpl {
+public class PersonServiceImpl implements PersonService {
 }
