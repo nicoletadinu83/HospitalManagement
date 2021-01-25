@@ -9,7 +9,7 @@ public class AddressDto {
     private String city;
     private String email;
     private String noTel;
-    private PersonModel personModel;
+    private PersonDto personDto;
 
     public long getId() {
         return id;
@@ -51,11 +51,11 @@ public class AddressDto {
         this.noTel = noTel;
     }
 
-    public PersonModel getPersonModel() {
-        return personModel;
+    public PersonDto getPersonDto() {
+        return personDto;
     }
 
-    public void setPersonModel( PersonModel personModel ) {
-        this.personModel = personModel;
+    public void setPersonDto(PersonDto personDto) {
+        this.personDto = personDto;
     }
 }

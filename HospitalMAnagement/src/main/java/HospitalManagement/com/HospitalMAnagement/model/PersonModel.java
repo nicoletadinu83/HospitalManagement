@@ -3,7 +3,7 @@ package HospitalManagement.com.HospitalMAnagement.model;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "person")
 
 public class PersonModel {
@@ -83,7 +83,7 @@ public class PersonModel {
         return addressModel;
     }
 
-    public void setAddressModel( AddressModel addressModel ) {
+    public void setAddressModel(AddressModel addressModel) {
         this.addressModel = addressModel;
     }
 }
