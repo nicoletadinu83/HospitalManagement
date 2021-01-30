@@ -5,8 +5,12 @@ import HospitalManagement.com.HospitalMAnagement.dto.DoctorDto;
 import HospitalManagement.com.HospitalMAnagement.dto.PacientDto;
 import HospitalManagement.com.HospitalMAnagement.dto.PersonDto;
 import HospitalManagement.com.HospitalMAnagement.model.AddressModel;
+import HospitalManagement.com.HospitalMAnagement.model.DoctorModel;
+import HospitalManagement.com.HospitalMAnagement.model.PacientModel;
 import HospitalManagement.com.HospitalMAnagement.model.PersonModel;
 import HospitalManagement.com.HospitalMAnagement.repository.AdressRepository;
+import HospitalManagement.com.HospitalMAnagement.repository.DoctorRepository;
+import HospitalManagement.com.HospitalMAnagement.repository.PacientRepository;
 import HospitalManagement.com.HospitalMAnagement.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +27,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     AdressRepository adressRepository;
-
+    @Autowired
+    DoctorRepository doctorRepository;
+    @Autowired
+    PacientRepository pacientRepository;
 
     @Override
     public DoctorDto getAllDoctors() {
@@ -92,7 +99,37 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public DoctorDto getDoctorById(Long id) {
+        Optional<DoctorModel> doctorModel = doctorRepository.findById(id);
+        if (doctorModel.isPresent()) {
+            DoctorDto doctorDto = new DoctorDto();
+            doctorDto.setId(doctorModel.get().getId());
+            doctorDto.setField(doctorModel.get().getField());
+            doctorDto.setAge(doctorModel.get().getAge());
+            doctorDto.setFirstName(doctorModel.get().getFirstName());
+            doctorDto.setLastName(doctorModel.get().getLastName());
+            doctorDto.setGender(doctorModel.get().getGender());
+            doctorDto.setPassword(doctorModel.get().getPassword());
+            doctorDto.setUserName(doctorModel.get().getUserName());
+            doctorDto.setMedicalFacilityName(doctorModel.get().getMedicalFacilityName());
 
+            AddressDto addressDto = new AddressDto();
+            AddressModel addressModel = doctorModel.get().getAddressModel();
+            addressDto.setId(addressModel.getId());
+            addressDto.setNoTel(addressModel.getNoTel());
+            addressDto.setEmail(addressModel.getEmail());
+            addressDto.setCity(addressModel.getCity());
+            addressDto.setAddress(addressModel.getAddress());
+
+            long id1 = addressModel.getPerson().getId();
+            PersonDto personDto = new PersonDto();
+            Optional<PersonModel> personModel = personRepository.findById(id1);
+            personDto.setId(personModel.get().getId());
+
+            addressDto.setPersonDto(personDto);
+            doctorDto.setAddressDto(addressDto);
+
+            return doctorDto;
+        }
 
         return null;
     }
@@ -100,6 +137,43 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PacientDto getPacientById(Long id) {
+        Optional<PacientModel> pacientModel = pacientRepository.findById(id);
+        if (pacientModel.isPresent()) {
+            PacientDto pacientDto = new PacientDto();
+            pacientDto.setId(pacientModel.get().getId());
+            pacientDto.setDisease(pacientModel.get().getDisease());
+            pacientDto.setAge(pacientModel.get().getAge());
+            pacientDto.setFirstName(pacientModel.get().getFirstName());
+            pacientDto.setLastName(pacientModel.get().getLastName());
+            pacientDto.setGender(pacientModel.get().getGender());
+            pacientDto.setPassword(pacientModel.get().getPassword());
+            pacientDto.setUserName(pacientModel.get().getUserName());
+
+            AddressDto addressDto = new AddressDto();
+            long id2 = pacientModel.get().getAddressModel().getId();
+            Optional<AddressModel> addressModelFound = adressRepository.findById(id2);
+            if (addressModelFound.isPresent()) {
+                AddressModel addressModel = addressModelFound.get();
+
+                addressDto.setId(addressModel.getId());
+                addressDto.setAddress(addressModel.getAddress());
+                addressDto.setCity(addressModel.getCity());
+                addressDto.setEmail(addressModel.getEmail());
+                addressDto.setNoTel(addressModel.getNoTel());
+
+                PersonDto personDto = new PersonDto();
+                long id3 = addressModel.getPerson().getId();
+                Optional<PersonModel> personModel = personRepository.findById(id3);
+                if (personModel.isPresent()) {
+                    personDto.setId(pacientModel.get().getId());
+                }
+                addressDto.setPersonDto(personDto);
+            }
+
+            pacientDto.setAddressDto(addressDto);
+        }
+
+
         return null;
     }
 
