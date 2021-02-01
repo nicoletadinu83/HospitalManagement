@@ -33,21 +33,21 @@ public class PersonServiceImpl implements PersonService {
     PacientRepository pacientRepository;
 
     @Override
-    public DoctorDto getAllDoctors() {
-        List<PersonModel> personModelList = personRepository.findAll();
-        List<PersonDto> personDtoList = new ArrayList<>();
-        for (PersonModel personModel : personModelList) {
-            PersonDto personDto = new PersonDto();
-            personDto.setId(personModel.getId());
-            personDto.setFirstName(personModel.getFirstName());
-            personDto.setLastName(personModel.getLastName());
-            personDto.setGender(personModel.getGender());
-            personDto.setAge(personModel.getAge());
-            personDto.setPassword(personModel.getPassword());
+    public List<DoctorDto> getAllDoctors() {
+        List<DoctorModel> doctorModelList = doctorRepository.findAll();
+        List<DoctorDto> doctorDtoList = new ArrayList<>();
+        for (DoctorModel doctorModel : doctorModelList) {
+            DoctorDto doctorDto = new DoctorDto();
+            doctorDto.setId(doctorModel.getId());
+            doctorDto.setFirstName(doctorModel.getFirstName());
+            doctorDto.setLastName(doctorModel.getLastName());
+            doctorDto.setGender(doctorModel.getGender());
+            doctorDto.setAge(doctorModel.getAge());
+            doctorDto.setPassword(doctorModel.getPassword());
 
             AddressDto adressDto = new AddressDto();
-            if (personModel.getAddressModel() != null) {
-                Optional<AddressModel> addressModel = adressRepository.findById(personModel.getAddressModel().getId());
+            if (doctorModel.getAddressModel() != null) {
+                Optional<AddressModel> addressModel = adressRepository.findById(doctorModel.getAddressModel().getId());
                 if (addressModel.isPresent()) {
                     adressDto.setId(addressModel.get().getId());
                     adressDto.setAddress(addressModel.get().getAddress());
@@ -59,13 +59,47 @@ public class PersonServiceImpl implements PersonService {
                     return null;
             }
 
-            personDto.setAddressDto(adressDto);
-            personDtoList.add(personDto);
+            doctorDto.setAddressDto(adressDto);
+            doctorDtoList.add(doctorDto);
         }
-        return (DoctorDto) personDtoList;
+        return doctorDtoList;
     }
 
-    public PacientDto getAllPacients() {
+
+     public List<PacientDto> getAllPacients() {
+        List<PacientModel> pacientModelList = pacientRepository.findAll();
+        List<PacientDto> pacientDtoList = new ArrayList<>();
+        for (PacientModel pacientModel : pacientModelList) {
+            PacientDto pacientDto = new PacientDto();
+            pacientDto.setId(pacientModel.getId());
+            pacientDto.setFirstName(pacientModel.getFirstName());
+            pacientDto.setLastName(pacientModel.getLastName());
+            pacientDto.setGender(pacientModel.getGender());
+            pacientDto.setAge(pacientModel.getAge());
+            pacientDto.setPassword(pacientModel.getPassword());
+
+            AddressDto adressDto = new AddressDto();
+            if (pacientModel.getAddressModel() != null) {
+                Optional<AddressModel> addressModel = adressRepository.findById(pacientModel.getAddressModel().getId());
+                if (addressModel.isPresent()) {
+                    adressDto.setId(addressModel.get().getId());
+                    adressDto.setAddress(addressModel.get().getAddress());
+                    adressDto.setCity(addressModel.get().getCity());
+                    adressDto.setEmail(addressModel.get().getEmail());
+                    adressDto.setNoTel(addressModel.get().getNoTel());
+
+                } else
+                    return null;
+
+                pacientDto.setAddressDto(adressDto);
+                pacientDtoList.add(pacientDto);
+            }
+        }
+        return pacientDtoList;
+        }
+
+
+    /*public List<PersonDto> getAllPacients() {
         List<PersonModel> personModelList = personRepository.findAll();
         List<PersonDto> personDtoList = new ArrayList<>();
         for (PersonModel personModel : personModelList) {
@@ -94,8 +128,12 @@ public class PersonServiceImpl implements PersonService {
                 personDtoList.add(personDto);
             }
         }
-        return (PacientDto) personDtoList;
-    }
+        return personDtoList;
+        }
+        */
+
+
+
 
     @Override
     public DoctorDto getDoctorById(Long id) {
@@ -171,6 +209,7 @@ public class PersonServiceImpl implements PersonService {
             }
 
             pacientDto.setAddressDto(addressDto);
+            return pacientDto;
         }
 
 
