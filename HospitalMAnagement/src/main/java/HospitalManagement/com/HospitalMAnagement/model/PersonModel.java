@@ -1,6 +1,7 @@
 package HospitalManagement.com.HospitalMAnagement.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,17 +25,17 @@ public class PersonModel {
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private AddressModel addressModel;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "doctor_consultation",
             joinColumns = @JoinColumn(name = "consultation_id"),
-            inverseJoinColumns = @JoinColumn(name="person_id)") )
-    List<ConsultationSchedulingModel> doctorConsultationSchedulingList;
+            inverseJoinColumns = @JoinColumn(name="person_id") )
+    List<ConsultationSchedulingModel> doctorConsultationSchedulingList = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="pacient_consultation",
             joinColumns = @JoinColumn(name = "consultation_id"),
-            inverseJoinColumns = @JoinColumn(name = "person_id"))
-    List<ConsultationSchedulingModel> pacientConsultationSchedulingList;
+            inverseJoinColumns = @JoinColumn(name = "person_id") )
+    List<ConsultationSchedulingModel> pacientConsultationSchedulingList = new ArrayList<>();
 
     public long getId() {
         return id;
