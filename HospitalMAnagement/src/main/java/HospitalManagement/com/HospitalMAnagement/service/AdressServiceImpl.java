@@ -70,7 +70,7 @@ public class AdressServiceImpl implements AdressService {
         Optional<PersonModel> personModel = personRepository.findById(id1);
         if (personModel.isPresent()) {
             personDto.setId(personModel.get().getId());
-            ;
+
             personDto.setGender(personModel.get().getGender());
             personDto.setPassword(personModel.get().getPassword());
             personDto.setUserName(personModel.get().getUserName());

@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface PacientService {
     List<PacientDto> getAllPacients();
-    PacientDto getPacientById(Long Id);
+    PacientDto getPacientById(Long id);
     void updatePacient(PacientDto pacientDto);
-    void deletePacient(Long Id);
+    void deletePacient(Long id);
     void addNewPacient(PacientDto newPacient);
 }

@@ -6,9 +6,10 @@ import java.util.List;
 
 public interface ConsultationSchedulingService {
    List<ConsultationSchedulingDto> getAllConsultations();
-   ConsultationSchedulingDto getConsultationById(Long Id);
+   ConsultationSchedulingDto getConsultationById(Long id);
    void updateConsultationScheduling(ConsultationSchedulingDto consultationSchedulingDto);
-   void deleteConsultationScheduling(Long Id);
+   void deleteConsultationScheduling(Long id);
    void addConsultationScheduling(ConsultationSchedulingDto newConsultationScheduling);
+//   List<ConsultationSchedulingDto> getAllConsultationForDoctor(Long id);
 
 }

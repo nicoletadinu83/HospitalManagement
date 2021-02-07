@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface MedicalServiceService {
     List<MedicalServiceDto> getAllMedicalService();
-    MedicalServiceDto getMedicalServiceById(Long Id);
+    MedicalServiceDto getMedicalServiceById(Long id);
     void updateMedicalService(MedicalServiceDto medicalServiceDto);
-    void deleteMedicalService(Long Id);
+    void deleteMedicalService(Long id);
     void addNewMedicalService(MedicalServiceDto newMedicalService);
 }
