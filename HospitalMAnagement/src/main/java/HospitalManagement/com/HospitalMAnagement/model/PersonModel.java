@@ -1,6 +1,8 @@
 package HospitalManagement.com.HospitalMAnagement.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,6 +24,18 @@ public class PersonModel {
 
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private AddressModel addressModel;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "doctor_consultation",
+            joinColumns = @JoinColumn(name = "consultation_id"),
+            inverseJoinColumns = @JoinColumn(name="person_id") )
+    List<ConsultationSchedulingModel> doctorConsultationSchedulingList = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="pacient_consultation",
+            joinColumns = @JoinColumn(name = "consultation_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id") )
+    List<ConsultationSchedulingModel> pacientConsultationSchedulingList = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -85,5 +99,21 @@ public class PersonModel {
 
     public void setAddressModel(AddressModel addressModel) {
         this.addressModel = addressModel;
+    }
+
+    public List<ConsultationSchedulingModel> getDoctorConsultationSchedulingList() {
+        return doctorConsultationSchedulingList;
+    }
+
+    public void setDoctorConsultationSchedulingList( List<ConsultationSchedulingModel> doctorConsultationSchedulingList ) {
+        this.doctorConsultationSchedulingList = doctorConsultationSchedulingList;
+    }
+
+    public List<ConsultationSchedulingModel> getPacientConsultationSchedulingList() {
+        return pacientConsultationSchedulingList;
+    }
+
+    public void setPacientConsultationSchedulingList( List<ConsultationSchedulingModel> pacientConsultationSchedulingList ) {
+        this.pacientConsultationSchedulingList = pacientConsultationSchedulingList;
     }
 }

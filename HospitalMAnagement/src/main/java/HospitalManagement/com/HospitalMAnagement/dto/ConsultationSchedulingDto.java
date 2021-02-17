@@ -1,8 +1,6 @@
 package HospitalManagement.com.HospitalMAnagement.dto;
 
-import HospitalManagement.com.HospitalMAnagement.model.MedicalServiceModel;
-import HospitalManagement.com.HospitalMAnagement.model.PersonModel;
-
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +8,9 @@ public class ConsultationSchedulingDto {
 
     private long id;
     private Date schedulingDate;
-    private List<MedicalServiceModel> medicalServiceModelList;
-    private List<PersonModel> doctorsList ;
-    private List<PersonModel> pacientsList;
+    private List<MedicalServiceDto> medicalServiceDtoList = new ArrayList<>();
+    private List<PersonDto> doctorsList = new ArrayList<>();
+    private List<PersonDto> pacientsList = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -30,27 +28,27 @@ public class ConsultationSchedulingDto {
         this.schedulingDate = schedulingDate;
     }
 
-    public List<MedicalServiceModel> getMedicalServiceModelList() {
-        return medicalServiceModelList;
+    public List<MedicalServiceDto> getMedicalServiceDtoList() {
+        return medicalServiceDtoList;
     }
 
-    public void setMedicalServiceModelList( List<MedicalServiceModel> medicalServiceModelList ) {
-        this.medicalServiceModelList = medicalServiceModelList;
+    public void setMedicalServiceDtoList( List<MedicalServiceDto> medicalServiceDtoList ) {
+        this.medicalServiceDtoList = medicalServiceDtoList;
     }
 
-    public List<PersonModel> getDoctorsList() {
+    public List<PersonDto> getDoctorsList() {
         return doctorsList;
     }
 
-    public void setDoctorsList( List<PersonModel> doctorsList ) {
+    public void setDoctorsList( List<PersonDto> doctorsList ) {
         this.doctorsList = doctorsList;
     }
 
-    public List<PersonModel> getPacientsList() {
+    public List<PersonDto> getPacientsList() {
         return pacientsList;
     }
 
-    public void setPacientsList( List<PersonModel> pacientsList ) {
+    public void setPacientsList( List<PersonDto> pacientsList ) {
         this.pacientsList = pacientsList;
     }
 }

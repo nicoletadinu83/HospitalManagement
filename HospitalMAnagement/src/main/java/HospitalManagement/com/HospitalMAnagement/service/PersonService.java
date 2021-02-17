@@ -1,5 +1,6 @@
 package HospitalManagement.com.HospitalMAnagement.service;
 
+import HospitalManagement.com.HospitalMAnagement.dto.ConsultationSchedulingDto;
 import HospitalManagement.com.HospitalMAnagement.dto.DoctorDto;
 import HospitalManagement.com.HospitalMAnagement.dto.PacientDto;
 import HospitalManagement.com.HospitalMAnagement.dto.PersonDto;
@@ -16,4 +17,7 @@ public interface PersonService {
      public void addPerson(PersonDto personDto);
      public void deletePerson(Long id);
      public void  updatePerson(PersonDto personDto);
+
+     List<ConsultationSchedulingDto> getAllConsultationForDoctor(Long id);
+     List<ConsultationSchedulingDto> getAllConsultationForPacient(Long id);
 }

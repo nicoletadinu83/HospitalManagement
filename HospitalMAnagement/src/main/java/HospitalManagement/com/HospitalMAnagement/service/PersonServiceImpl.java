@@ -1,17 +1,8 @@
 package HospitalManagement.com.HospitalMAnagement.service;
 
-import HospitalManagement.com.HospitalMAnagement.dto.AddressDto;
-import HospitalManagement.com.HospitalMAnagement.dto.DoctorDto;
-import HospitalManagement.com.HospitalMAnagement.dto.PacientDto;
-import HospitalManagement.com.HospitalMAnagement.dto.PersonDto;
-import HospitalManagement.com.HospitalMAnagement.model.AddressModel;
-import HospitalManagement.com.HospitalMAnagement.model.DoctorModel;
-import HospitalManagement.com.HospitalMAnagement.model.PacientModel;
-import HospitalManagement.com.HospitalMAnagement.model.PersonModel;
-import HospitalManagement.com.HospitalMAnagement.repository.AdressRepository;
-import HospitalManagement.com.HospitalMAnagement.repository.DoctorRepository;
-import HospitalManagement.com.HospitalMAnagement.repository.PacientRepository;
-import HospitalManagement.com.HospitalMAnagement.repository.PersonRepository;
+import HospitalManagement.com.HospitalMAnagement.dto.*;
+import HospitalManagement.com.HospitalMAnagement.model.*;
+import HospitalManagement.com.HospitalMAnagement.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +22,8 @@ public class PersonServiceImpl implements PersonService {
     DoctorRepository doctorRepository;
     @Autowired
     PacientRepository pacientRepository;
+    @Autowired
+    ConsultationSchedulingRepository consultationSchedulingRepository;
 
     @Override
     public List<DoctorDto> getAllDoctors() {
@@ -276,6 +269,40 @@ public class PersonServiceImpl implements PersonService {
             }
         }
         personRepository.save(personFind.get());
+    }
+
+    @Override
+    public List<ConsultationSchedulingDto> getAllConsultationForDoctor( Long id ) {
+        Optional<PersonModel> personModel = personRepository.findById(id);
+        if(personModel.isPresent()){
+            List<ConsultationSchedulingModel> consultationSchedulingModelList = personModel.get().getDoctorConsultationSchedulingList();
+            List<ConsultationSchedulingDto> consultationSchedulingDtoList= new ArrayList<>();
+            for(ConsultationSchedulingModel consultations : consultationSchedulingModelList){
+                ConsultationSchedulingDto consultationSchedulingDto = new ConsultationSchedulingDto();
+                consultationSchedulingDto.setId(consultations.getId());
+                consultationSchedulingDto.setSchedulingDate(consultations.getSchedulingDate());
+                consultationSchedulingDtoList.add(consultationSchedulingDto);
+            }
+            return consultationSchedulingDtoList;
+        }
+        return null;
+    }
+
+    @Override
+    public List<ConsultationSchedulingDto> getAllConsultationForPacient( Long id ) {
+        Optional<PersonModel> personModel = personRepository.findById(id);
+        if(personModel.isPresent()){
+            List<ConsultationSchedulingModel> consultationSchedulingModelList = personModel.get().getPacientConsultationSchedulingList();
+            List<ConsultationSchedulingDto> consultationSchedulingDtoList= new ArrayList<>();
+            for(ConsultationSchedulingModel consultations : consultationSchedulingModelList){
+                ConsultationSchedulingDto consultationSchedulingDto = new ConsultationSchedulingDto();
+                consultationSchedulingDto.setId(consultations.getId());
+                consultationSchedulingDto.setSchedulingDate(consultations.getSchedulingDate());
+                consultationSchedulingDtoList.add(consultationSchedulingDto);
+            }
+            return consultationSchedulingDtoList;
+        }
+        return null;
     }
 
 }

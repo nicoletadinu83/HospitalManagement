@@ -1,5 +1,6 @@
 package HospitalManagement.com.HospitalMAnagement.controller;
 
+import HospitalManagement.com.HospitalMAnagement.dto.ConsultationSchedulingDto;
 import HospitalManagement.com.HospitalMAnagement.dto.DoctorDto;
 import HospitalManagement.com.HospitalMAnagement.dto.PacientDto;
 import HospitalManagement.com.HospitalMAnagement.dto.PersonDto;
@@ -65,4 +66,15 @@ public class PersonController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping("/getConsultatinSchedulingForDoctor/{id}")
+    public ResponseEntity<List<ConsultationSchedulingDto>> getAllConsultationForDoctor(@PathVariable("id") Long id){
+        List<ConsultationSchedulingDto> consultationSchedulingDtoList = personService.getAllConsultationForDoctor(id);
+        return new ResponseEntity(consultationSchedulingDtoList, HttpStatus.OK);
+    }
+
+    @GetMapping("/getConsultatinSchedulingForPacient/{id}")
+    public ResponseEntity<List<ConsultationSchedulingDto>> getAllConsultationForPacient(@PathVariable("id") Long id){
+        List<ConsultationSchedulingDto> consultationSchedulingDtoList = personService.getAllConsultationForPacient(id);
+        return new ResponseEntity(consultationSchedulingDtoList, HttpStatus.OK);
+    }
 }

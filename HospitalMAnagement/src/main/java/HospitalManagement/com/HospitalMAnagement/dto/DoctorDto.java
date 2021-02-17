@@ -6,8 +6,8 @@ import java.util.List;
 
 public class DoctorDto extends PersonDto {
 
-        private String medicalFacilityName; /*denumire cabinet*/
-        private String field;/*domeniu: oftalmologie, stomatologie, etc*/
+    private String medicalFacilityName; /*denumire cabinet*/
+    private String field;/*domeniu: oftalmologie, stomatologie, etc*/
 
     public List<PacientDto> getPacientDtoList() {
         return pacientDtoList;

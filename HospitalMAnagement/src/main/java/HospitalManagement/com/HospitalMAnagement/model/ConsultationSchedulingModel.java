@@ -23,11 +23,11 @@ public class ConsultationSchedulingModel {
             inverseJoinColumns = @JoinColumn(name = "medicalservice_id"))
     private List<MedicalServiceModel> medicalServiceModelList = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "doctorConsultationSchedulingList", cascade = CascadeType.ALL)
+    private List<PersonModel> doctorsList = new ArrayList<>();
 
-//    private List<PersonModel> doctorsList = new ArrayList<>();
-//
-//
-//    private List<PersonModel> pacientsList = new ArrayList<>();
+    @ManyToMany(mappedBy = "pacientConsultationSchedulingList", cascade = CascadeType.ALL)
+    private List<PersonModel> pacientsList = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -51,5 +51,21 @@ public class ConsultationSchedulingModel {
 
     public void setMedicalServiceModelList( List<MedicalServiceModel> medicalServiceModelList ) {
         this.medicalServiceModelList = medicalServiceModelList;
+    }
+
+    public List<PersonModel> getDoctorsList() {
+        return doctorsList;
+    }
+
+    public void setDoctorsList( List<PersonModel> doctorsList ) {
+        this.doctorsList = doctorsList;
+    }
+
+    public List<PersonModel> getPacientsList() {
+        return pacientsList;
+    }
+
+    public void setPacientsList( List<PersonModel> pacientsList ) {
+        this.pacientsList = pacientsList;
     }
 }

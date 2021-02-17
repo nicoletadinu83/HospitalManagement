@@ -1,14 +1,12 @@
 package HospitalManagement.com.HospitalMAnagement.dto;
-
-import HospitalManagement.com.HospitalMAnagement.model.ConsultationSchedulingModel;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalServiceDto {
     private long id;
     private String serviceName;
     private double servicePrice;
-    private List<ConsultationSchedulingModel> consultationSchedulingModelList;
+    private List<ConsultationSchedulingDto> consultationSchedulingDtoList = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -34,11 +32,11 @@ public class MedicalServiceDto {
         this.servicePrice = servicePrice;
     }
 
-    public List<ConsultationSchedulingModel> getConsultationSchedulingModelList() {
-        return consultationSchedulingModelList;
+    public List<ConsultationSchedulingDto> getConsultationSchedulingDtoList() {
+        return consultationSchedulingDtoList;
     }
 
-    public void setConsultationSchedulingModelList( List<ConsultationSchedulingModel> consultationSchedulingModelList ) {
-        this.consultationSchedulingModelList = consultationSchedulingModelList;
+    public void setConsultationSchedulingDtoList( List<ConsultationSchedulingDto> consultationSchedulingDtoList ) {
+        this.consultationSchedulingDtoList = consultationSchedulingDtoList;
     }
 }

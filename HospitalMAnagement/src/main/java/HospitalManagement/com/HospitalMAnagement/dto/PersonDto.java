@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonDto {
     private long id;
@@ -18,6 +20,8 @@ public class PersonDto {
     private String userName;
     private String password;
     private AddressDto addressDto;
+    private List<ConsultationSchedulingDto> doctorConsultationSchedulingDtoList = new ArrayList<>();
+    private List<ConsultationSchedulingDto> pacientConsultationSchedulingDtoList = new ArrayList<>();
 
     public long getId() {
         return id;
