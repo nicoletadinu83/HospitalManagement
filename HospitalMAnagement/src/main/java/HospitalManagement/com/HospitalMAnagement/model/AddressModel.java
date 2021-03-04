@@ -15,7 +15,7 @@ public class AddressModel {
     private String email;
     private String noTel;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne/*(fetch = FetchType.LAZY)*/
     private PersonModel person;
 
     public long getId() {

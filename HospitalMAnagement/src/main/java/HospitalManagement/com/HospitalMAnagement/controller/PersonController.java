@@ -32,18 +32,18 @@ public class PersonController {
         return new ResponseEntity(pacientDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("getPacient/{id}")
+   /* @GetMapping("getPacient/{id}")
     public ResponseEntity<PacientDto> getPacientById(@PathVariable Long id) {
         PacientDto pacientDto = personService.getPacientById(id);
         System.out.println("I found the pacient: " + pacientDto);
         return new ResponseEntity(pacientDto, HttpStatus.OK);
-    }
+    }*/
 
-    @GetMapping("getDoctor/{id}")
+   /* @GetMapping("getDoctor/{id}")
     public ResponseEntity<DoctorDto> getDoctorById(@PathVariable Long id) {
         DoctorDto doctorDto = personService.getDoctorById(id);
         return new ResponseEntity(doctorDto, HttpStatus.OK);
-    }
+    }*/
 
     @DeleteMapping("deletePerson/{id}")
     public ResponseEntity deletePerson(@PathVariable Long id) {

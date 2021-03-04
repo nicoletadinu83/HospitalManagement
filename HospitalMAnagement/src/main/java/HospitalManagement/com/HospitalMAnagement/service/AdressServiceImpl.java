@@ -36,20 +36,22 @@ public class AdressServiceImpl implements AdressService {
             addressDto.setEmail(addressModel.getEmail());
             addressDto.setNoTel(addressModel.getNoTel());
 
-            Long id = addressModel.getPerson().getId();
-            Optional<PersonModel> personModel = personRepository.findById(id);
-            PersonDto personDto = new PersonDto();
-            personDto.setId(personModel.get().getId());
-            personDto.setFirstName(personModel.get().getFirstName());
-            personDto.setLastName(personModel.get().getLastName());
-            personDto.setAge(personModel.get().getAge());
-            personDto.setUserName(personModel.get().getUserName());
-            personDto.setPassword(personModel.get().getPassword());
-            personDto.setGender(personModel.get().getGender());
-            personDto.setAddressDto(addressDto);
+           // if (addressModel.getPerson() != null) {
+                Long id = addressModel.getPerson().getId();
+                Optional<PersonModel> personModel = personRepository.findById(id);
+                PersonDto personDto = new PersonDto();
+                personDto.setId(personModel.get().getId());
+                personDto.setFirstName(personModel.get().getFirstName());
+                personDto.setLastName(personModel.get().getLastName());
+                personDto.setAge(personModel.get().getAge());
+                personDto.setUserName(personModel.get().getUserName());
+                personDto.setPassword(personModel.get().getPassword());
+                personDto.setGender(personModel.get().getGender());
+                personDto.setAddressDto(addressDto);
 
-            addressDto.setPersonDto(personDto);
-            addressDtoList.add(addressDto);
+                addressDto.setPersonDto(personDto);
+                addressDtoList.add(addressDto);
+
         }
 
         return addressDtoList;
