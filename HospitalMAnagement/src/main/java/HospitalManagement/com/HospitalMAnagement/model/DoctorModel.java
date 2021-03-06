@@ -31,4 +31,12 @@ public class DoctorModel extends PersonModel {
     public void setField(String field) {
         this.field = field;
     }
+
+    public List<PacientModel> getPacientModelList() {
+        return pacientModelList;
+    }
+
+    public void setPacientModelList( List<PacientModel> pacientModelList ) {
+        this.pacientModelList = pacientModelList;
+    }
 }
