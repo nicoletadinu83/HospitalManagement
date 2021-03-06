@@ -1,5 +1,6 @@
 package HospitalManagement.com.HospitalMAnagement.service;
 
+import HospitalManagement.com.HospitalMAnagement.dto.AddressDto;
 import HospitalManagement.com.HospitalMAnagement.dto.DoctorDto;
 import HospitalManagement.com.HospitalMAnagement.model.DoctorModel;
 import HospitalManagement.com.HospitalMAnagement.repository.DoctorRepository;
@@ -64,9 +65,35 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public void addNewDoctor( DoctorDto newDoctorDto ) {
         DoctorModel doctorModel = new DoctorModel();
-        doctorModel.setId(newDoctorDto.getId());
+//        doctorModel.setId(newDoctorDto.getId());
         doctorModel.setField(newDoctorDto.getField());
         doctorModel.setMedicalFacilityName(newDoctorDto.getMedicalFacilityName());
         doctorRepository.save(doctorModel);
     }
+
+    @Override
+    public List<DoctorDto> findAllDoctorsDetails() {
+        List<DoctorModel> doctorsDetailsList = doctorRepository.findAllDoctorsDetails();
+        List<DoctorDto> doctorDtos = new ArrayList<>();
+        for(DoctorModel doctor : doctorsDetailsList){
+            DoctorDto doctorDto = new DoctorDto();
+            doctorDto.setField(doctor.getField());
+            doctorDto.setMedicalFacilityName(doctor.getMedicalFacilityName());
+            doctorDto.setFirstName(doctor.getFirstName());
+            doctorDto.setLastName(doctor.getLastName());
+            doctorDto.setAge(doctor.getAge());
+            doctorDto.setGender(doctor.getGender());
+            doctorDto.setPassword(doctor.getPassword());
+            doctorDto.setUserName(doctor.getUserName());
+            AddressDto addressDto = new AddressDto();
+            addressDto.setAddress(doctor.getAddressModel().getAddress());
+            addressDto.setCity(doctor.getAddressModel().getCity());
+            addressDto.setEmail(doctor.getAddressModel().getEmail());
+            addressDto.setNoTel(doctor.getAddressModel().getNoTel());
+            doctorDto.setAddressDto(addressDto);
+            doctorDtos.add(doctorDto);
+        }
+        return doctorDtos;
+    }
+
 }

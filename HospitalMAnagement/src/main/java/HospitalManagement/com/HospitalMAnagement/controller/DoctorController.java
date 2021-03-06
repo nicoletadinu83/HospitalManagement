@@ -28,6 +28,12 @@ public class DoctorController {
         return new ResponseEntity(doctorDto, HttpStatus.OK);
     }
 
+    @GetMapping("/findAllDoctorsDetails")
+    public ResponseEntity<List<DoctorDto>> findAllDoctorsDetails(){
+        List<DoctorDto> doctorDtoWithDetailsList = doctorService.findAllDoctorsDetails();
+        return new ResponseEntity(doctorDtoWithDetailsList, HttpStatus.OK);
+    }
+
     @PostMapping("/addDoctor")
     public ResponseEntity addDoctor(@RequestBody DoctorDto doctorDto){
         doctorService.addNewDoctor(doctorDto);
