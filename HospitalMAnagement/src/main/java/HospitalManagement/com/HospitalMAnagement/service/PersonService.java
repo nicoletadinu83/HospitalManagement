@@ -18,6 +18,7 @@ public interface PersonService {
      public void deletePerson(Long id);
      public void  updatePerson(PersonDto personDto);
 
+     void addPerson1(PersonDto personDto);
      List<ConsultationSchedulingDto> getAllConsultationForDoctor(Long id);
      List<ConsultationSchedulingDto> getAllConsultationForPacient(Long id);
 }

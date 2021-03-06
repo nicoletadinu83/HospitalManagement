@@ -237,6 +237,31 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public void addPerson1( PersonDto personDto ) {
+        PersonModel personModel = new PersonModel();
+        personModel.setId(personDto.getId());
+        personModel.setFirstName(personDto.getFirstName());
+        personModel.setLastName(personDto.getLastName());
+        personModel.setAge(personDto.getAge());
+        personModel.setGender(personDto.getGender());
+        personModel.setUserName(personDto.getUserName());
+        personModel.setPassword(personDto.getPassword());
+        personRepository.save(personModel);
+
+        AddressModel addressModel = new AddressModel();
+        if (personDto.getAddressDto() != null) {
+            AddressDto addressDto = personDto.getAddressDto();
+            addressModel.setAddress(addressDto.getAddress());
+            addressModel.setCity(addressDto.getCity());
+            addressModel.setEmail(addressDto.getEmail());
+            addressModel.setNoTel(addressDto.getNoTel());
+            addressModel.setPerson(personModel);
+            adressRepository.save(addressModel);
+        }
+    }
+
+
+    @Override
     public void deletePerson(Long id) {
         personRepository.deleteById(id);
     }
