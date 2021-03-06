@@ -59,6 +59,12 @@ public class PersonController {
          return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PostMapping("addPerson1")
+    public ResponseEntity addPerson1(@RequestBody PersonDto personDto){
+        personService.addPerson1(personDto);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @PutMapping("updatePerson")
     public ResponseEntity updatePerson(@RequestBody PersonDto personDto){
         personService.updatePerson(personDto);
