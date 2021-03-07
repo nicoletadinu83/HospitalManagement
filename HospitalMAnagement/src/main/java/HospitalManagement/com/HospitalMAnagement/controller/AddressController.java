@@ -16,30 +16,30 @@ public class AddressController {
     @Autowired
     AdressServiceImpl addressService;
 
-    @GetMapping("getListOfAddress")
+    @GetMapping("/getListOfAddress")
     public ResponseEntity<List<AddressDto>> getAllAddress() {
         List<AddressDto> addressDtoList = addressService.getAllAddress();
         return new ResponseEntity(addressDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("getAddress/{id}")
+    @GetMapping("/getAddress/{id}")
      public ResponseEntity<AddressDto> getAddressById(@PathVariable Long id){
        AddressDto addressDto= addressService.getAddressByID(id);
        return new ResponseEntity (addressDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteAddress/{id}")
+    @DeleteMapping("/deleteAddress/{id}")
     public ResponseEntity deleteAddress(@PathVariable Long id){
         addressService.deleteAddress(id);
         return new ResponseEntity(HttpStatus.OK);
     }
-    @PostMapping("addAdress")
+    @PostMapping("/addAdress")
     public ResponseEntity addAddress(@RequestBody AddressDto addressDto){
         addressService.addAddress(addressDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("updateAddress")
+    @PutMapping("/updateAddress")
     public ResponseEntity updateAddress(@RequestBody AddressDto addressDto){
         addressService.updateAdreess(addressDto);
          return new ResponseEntity(HttpStatus.OK);

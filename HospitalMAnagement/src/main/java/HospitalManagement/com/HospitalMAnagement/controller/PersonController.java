@@ -18,19 +18,31 @@ public class PersonController {
     @Autowired
     private PersonServiceImpl personService;
 
-    @GetMapping("getDoctors")
-    public ResponseEntity<List<DoctorDto>> getDoctorsList() {
-        List<DoctorDto> doctorList = personService.getAllDoctors();
-        System.out.println("doctorList: " + doctorList);
-        return new ResponseEntity(doctorList, HttpStatus.OK);
+    @GetMapping("/getAllPersons")
+    public ResponseEntity<List<PersonDto>> getAllPersons() {
+        List<PersonDto> personDtos = personService.getAllPersons();
+        return new ResponseEntity(personDtos, HttpStatus.OK);
     }
 
-    @GetMapping("getPacients")
-    public ResponseEntity<List<PacientDto>> getAllPacients() {
-        List<PacientDto> pacientDtoList = personService.getAllPacients();
-        System.out.println("Pacient list are: " + pacientDtoList);
-        return new ResponseEntity(pacientDtoList, HttpStatus.OK);
+    @GetMapping("/getPersonById/{id}")
+    public ResponseEntity<PersonDto> getPersonById( @PathVariable("id") Long id ) {
+        PersonDto personDto = personService.getPersonById(id);
+        return new ResponseEntity(personDto, HttpStatus.OK);
     }
+
+//    @GetMapping("getDoctors")
+//    public ResponseEntity<List<DoctorDto>> getDoctorsList() {
+//        List<DoctorDto> doctorList = personService.getAllDoctors();
+//        System.out.println("doctorList: " + doctorList);
+//        return new ResponseEntity(doctorList, HttpStatus.OK);
+//    }
+
+//    @GetMapping("getPacients")
+//    public ResponseEntity<List<PacientDto>> getAllPacients() {
+//        List<PacientDto> pacientDtoList = personService.getAllPacients();
+//        System.out.println("Pacient list are: " + pacientDtoList);
+//        return new ResponseEntity(pacientDtoList, HttpStatus.OK);
+//    }
 
    /* @GetMapping("getPacient/{id}")
     public ResponseEntity<PacientDto> getPacientById(@PathVariable Long id) {
@@ -46,40 +58,41 @@ public class PersonController {
     }*/
 
     @DeleteMapping("deletePerson/{id}")
-    public ResponseEntity deletePerson(@PathVariable Long id) {
+
+    public ResponseEntity deletePerson( @PathVariable Long id ) {
         personService.deletePerson(id);
         System.out.println(" The person with id = " + id + " was deleted.");
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("addPerson")
-    public ResponseEntity addPerson(@RequestBody PersonDto personDto){
+    public ResponseEntity addPerson( @RequestBody PersonDto personDto ) {
         personService.addPerson(personDto);
-        System.out.println("Was addes the  person : "+ personDto);
-         return new ResponseEntity(HttpStatus.OK);
+        System.out.println("Was addes the  person : " + personDto);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("addPerson1")
-    public ResponseEntity addPerson1(@RequestBody PersonDto personDto){
+    public ResponseEntity addPerson1( @RequestBody PersonDto personDto ) {
         personService.addPerson1(personDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @PutMapping("updatePerson")
-    public ResponseEntity updatePerson(@RequestBody PersonDto personDto){
+    public ResponseEntity updatePerson( @RequestBody PersonDto personDto ) {
         personService.updatePerson(personDto);
         System.out.println("The person was updated");
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/getConsultatinSchedulingForDoctor/{id}")
-    public ResponseEntity<List<ConsultationSchedulingDto>> getAllConsultationForDoctor(@PathVariable("id") Long id){
+    public ResponseEntity<List<ConsultationSchedulingDto>> getAllConsultationForDoctor( @PathVariable("id") Long id ) {
         List<ConsultationSchedulingDto> consultationSchedulingDtoList = personService.getAllConsultationForDoctor(id);
         return new ResponseEntity(consultationSchedulingDtoList, HttpStatus.OK);
     }
 
     @GetMapping("/getConsultatinSchedulingForPacient/{id}")
-    public ResponseEntity<List<ConsultationSchedulingDto>> getAllConsultationForPacient(@PathVariable("id") Long id){
+    public ResponseEntity<List<ConsultationSchedulingDto>> getAllConsultationForPacient( @PathVariable("id") Long id ) {
         List<ConsultationSchedulingDto> consultationSchedulingDtoList = personService.getAllConsultationForPacient(id);
         return new ResponseEntity(consultationSchedulingDtoList, HttpStatus.OK);
     }

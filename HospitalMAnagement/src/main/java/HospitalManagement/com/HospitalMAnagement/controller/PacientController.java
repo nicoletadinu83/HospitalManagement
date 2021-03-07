@@ -31,10 +31,10 @@ public class PacientController {
         return new ResponseEntity(pacientDto, HttpStatus.OK);
     }
 
-    @GetMapping("/findAllDoctorsDetails")
-    public ResponseEntity<List<PacientModel>> findAllDoctorsDetails(){
-        List<PacientDto> findAllDoctorsDetails = pacientService.pacientDetailsList();
-        return  new ResponseEntity(findAllDoctorsDetails, HttpStatus.OK);
+    @GetMapping("/pacientDetailsList")
+    public ResponseEntity<List<PacientModel>> pacientDetailsList(){
+        List<PacientDto> pacientDetailsList = pacientService.pacientDetailsList();
+        return  new ResponseEntity(pacientDetailsList, HttpStatus.OK);
     }
 
     @PostMapping("/addPacient")
