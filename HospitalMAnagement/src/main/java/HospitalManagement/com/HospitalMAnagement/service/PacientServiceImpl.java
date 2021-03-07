@@ -1,5 +1,7 @@
 package HospitalManagement.com.HospitalMAnagement.service;
 
+import HospitalManagement.com.HospitalMAnagement.dto.AddressDto;
+import HospitalManagement.com.HospitalMAnagement.dto.DoctorDto;
 import HospitalManagement.com.HospitalMAnagement.dto.PacientDto;
 import HospitalManagement.com.HospitalMAnagement.model.PacientModel;
 import HospitalManagement.com.HospitalMAnagement.repository.PacientRepository;
@@ -68,5 +70,29 @@ public class PacientServiceImpl implements PacientService {
         pacientModel.setDisease(newPacient.getDisease());
         pacientRepository.save(pacientModel);
 
+    }
+
+    @Override
+    public List<PacientDto> pacientDetailsList() {
+        List<PacientModel> pacientDetailsList = pacientRepository.pacientDetailsList();
+        List<PacientDto> pacientDtoList = new ArrayList<>();
+        for(PacientModel pacient : pacientDetailsList){
+            PacientDto pacientDto = new PacientDto();
+            pacientDto.setDisease(pacient.getDisease());
+            pacientDto.setFirstName(pacient.getFirstName());
+            pacientDto.setLastName(pacient.getLastName());
+            pacientDto.setAge(pacient.getAge());
+            pacientDto.setGender(pacient.getGender());
+            pacientDto.setPassword(pacient.getPassword());
+            pacientDto.setUserName(pacient.getUserName());
+            AddressDto addressDto = new AddressDto();
+            addressDto.setAddress(pacient.getAddressModel().getAddress());
+            addressDto.setCity(pacient.getAddressModel().getCity());
+            addressDto.setEmail(pacient.getAddressModel().getEmail());
+            addressDto.setNoTel(pacient.getAddressModel().getNoTel());
+            pacientDto.setAddressDto(addressDto);
+            pacientDtoList.add(pacientDto);
+        }
+        return pacientDtoList;
     }
 }

@@ -10,4 +10,5 @@ public interface PacientService {
     void updatePacient(PacientDto pacientDto);
     void deletePacient(Long id);
     void addNewPacient(PacientDto newPacient);
+    List<PacientDto> pacientDetailsList();
 }
