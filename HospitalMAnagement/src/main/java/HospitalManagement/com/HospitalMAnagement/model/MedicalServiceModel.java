@@ -13,8 +13,16 @@ public class MedicalServiceModel {
     private String serviceName;
     private double servicePrice;
 
-    @ManyToMany(mappedBy = "medicalServiceModelList", cascade = CascadeType.ALL)
-    private List<ConsultationSchedulingModel> consultationSchedulingModelList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ConsultationSchedulingModel consultationScheduling;
+
+    public ConsultationSchedulingModel getConsultationScheduling() {
+        return consultationScheduling;
+    }
+
+    public void setConsultationScheduling( ConsultationSchedulingModel consultationScheduling ) {
+        this.consultationScheduling = consultationScheduling;
+    }
 
     public long getId() {
         return id;
@@ -40,11 +48,4 @@ public class MedicalServiceModel {
         this.servicePrice = servicePrice;
     }
 
-    public List<ConsultationSchedulingModel> getConsultationSchedulingModelList() {
-        return consultationSchedulingModelList;
-    }
-
-    public void setConsultationSchedulingModelList( List<ConsultationSchedulingModel> consultationSchedulingModelList ) {
-        this.consultationSchedulingModelList = consultationSchedulingModelList;
-    }
 }

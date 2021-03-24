@@ -25,17 +25,13 @@ public class PersonModel {
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private AddressModel addressModel;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "doctor_consultation",
-            joinColumns = @JoinColumn(name = "consultation_id"),
-            inverseJoinColumns = @JoinColumn(name="person_id") )
-    List<ConsultationSchedulingModel> doctorConsultationSchedulingList = new ArrayList<>();
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ConsultationSchedulingModel> doctorConsultationList= new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="pacient_consultation",
-            joinColumns = @JoinColumn(name = "consultation_id"),
-            inverseJoinColumns = @JoinColumn(name = "person_id") )
-    List<ConsultationSchedulingModel> pacientConsultationSchedulingList = new ArrayList<>();
+    @OneToMany(mappedBy = "pacient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ConsultationSchedulingModel> pacientConsultationList = new ArrayList<>();
+
+
 
     public long getId() {
         return id;
@@ -101,19 +97,19 @@ public class PersonModel {
         this.addressModel = addressModel;
     }
 
-    public List<ConsultationSchedulingModel> getDoctorConsultationSchedulingList() {
-        return doctorConsultationSchedulingList;
+    public List<ConsultationSchedulingModel> getDoctorConsultationList() {
+        return doctorConsultationList;
     }
 
-    public void setDoctorConsultationSchedulingList( List<ConsultationSchedulingModel> doctorConsultationSchedulingList ) {
-        this.doctorConsultationSchedulingList = doctorConsultationSchedulingList;
+    public void setDoctorConsultationList( List<ConsultationSchedulingModel> doctorConsultationList ) {
+        this.doctorConsultationList = doctorConsultationList;
     }
 
-    public List<ConsultationSchedulingModel> getPacientConsultationSchedulingList() {
-        return pacientConsultationSchedulingList;
+    public List<ConsultationSchedulingModel> getPacientConsultationList() {
+        return pacientConsultationList;
     }
 
-    public void setPacientConsultationSchedulingList( List<ConsultationSchedulingModel> pacientConsultationSchedulingList ) {
-        this.pacientConsultationSchedulingList = pacientConsultationSchedulingList;
+    public void setPacientConsultationList( List<ConsultationSchedulingModel> pacientConsultationList ) {
+        this.pacientConsultationList = pacientConsultationList;
     }
 }

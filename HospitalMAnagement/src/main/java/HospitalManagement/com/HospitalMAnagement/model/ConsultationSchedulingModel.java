@@ -16,18 +16,31 @@ public class ConsultationSchedulingModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date schedulingDate;
 
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "schedule_medicalservice",
-            joinColumns = @JoinColumn(name = "consultation_id"),
-            inverseJoinColumns = @JoinColumn(name = "medicalservice_id"))
+    @OneToMany(mappedBy = "consultationScheduling", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalServiceModel> medicalServiceModelList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "doctorConsultationSchedulingList", cascade = CascadeType.ALL)
-    private List<PersonModel> doctorsList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PersonModel doctor = new PersonModel();
 
-    @ManyToMany(mappedBy = "pacientConsultationSchedulingList", cascade = CascadeType.ALL)
-    private List<PersonModel> pacientsList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PersonModel pacient =new PersonModel();
+
+
+    public PersonModel getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor( PersonModel doctor ) {
+        this.doctor = doctor;
+    }
+
+    public PersonModel getPacient() {
+        return pacient;
+    }
+
+    public void setPacient( PersonModel pacient ) {
+        this.pacient = pacient;
+    }
 
     public long getId() {
         return id;
@@ -53,19 +66,4 @@ public class ConsultationSchedulingModel {
         this.medicalServiceModelList = medicalServiceModelList;
     }
 
-    public List<PersonModel> getDoctorsList() {
-        return doctorsList;
-    }
-
-    public void setDoctorsList( List<PersonModel> doctorsList ) {
-        this.doctorsList = doctorsList;
-    }
-
-    public List<PersonModel> getPacientsList() {
-        return pacientsList;
-    }
-
-    public void setPacientsList( List<PersonModel> pacientsList ) {
-        this.pacientsList = pacientsList;
-    }
 }

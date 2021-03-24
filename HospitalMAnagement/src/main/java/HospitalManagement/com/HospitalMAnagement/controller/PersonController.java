@@ -30,34 +30,7 @@ public class PersonController {
         return new ResponseEntity(personDto, HttpStatus.OK);
     }
 
-//    @GetMapping("getDoctors")
-//    public ResponseEntity<List<DoctorDto>> getDoctorsList() {
-//        List<DoctorDto> doctorList = personService.getAllDoctors();
-//        System.out.println("doctorList: " + doctorList);
-//        return new ResponseEntity(doctorList, HttpStatus.OK);
-//    }
-
-//    @GetMapping("getPacients")
-//    public ResponseEntity<List<PacientDto>> getAllPacients() {
-//        List<PacientDto> pacientDtoList = personService.getAllPacients();
-//        System.out.println("Pacient list are: " + pacientDtoList);
-//        return new ResponseEntity(pacientDtoList, HttpStatus.OK);
-//    }
-
-   /* @GetMapping("getPacient/{id}")
-    public ResponseEntity<PacientDto> getPacientById(@PathVariable Long id) {
-        PacientDto pacientDto = personService.getPacientById(id);
-        System.out.println("I found the pacient: " + pacientDto);
-        return new ResponseEntity(pacientDto, HttpStatus.OK);
-    }*/
-
-   /* @GetMapping("getDoctor/{id}")
-    public ResponseEntity<DoctorDto> getDoctorById(@PathVariable Long id) {
-        DoctorDto doctorDto = personService.getDoctorById(id);
-        return new ResponseEntity(doctorDto, HttpStatus.OK);
-    }*/
-
-    @DeleteMapping("deletePerson/{id}")
+    @DeleteMapping("/deletePerson/{id}")
 
     public ResponseEntity deletePerson( @PathVariable Long id ) {
         personService.deletePerson(id);
@@ -65,20 +38,20 @@ public class PersonController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("addPerson")
+    @PostMapping("/addPerson")
     public ResponseEntity addPerson( @RequestBody PersonDto personDto ) {
         personService.addPerson(personDto);
         System.out.println("Was addes the  person : " + personDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("addPerson1")
+    @PostMapping("/addPerson1")
     public ResponseEntity addPerson1( @RequestBody PersonDto personDto ) {
         personService.addPerson1(personDto);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("updatePerson")
+    @PutMapping("/updatePerson")
     public ResponseEntity updatePerson( @RequestBody PersonDto personDto ) {
         personService.updatePerson(personDto);
         System.out.println("The person was updated");

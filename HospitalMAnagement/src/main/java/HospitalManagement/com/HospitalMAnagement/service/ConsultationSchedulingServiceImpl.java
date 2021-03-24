@@ -1,6 +1,7 @@
 package HospitalManagement.com.HospitalMAnagement.service;
 
 import HospitalManagement.com.HospitalMAnagement.dto.ConsultationSchedulingDto;
+import HospitalManagement.com.HospitalMAnagement.dto.PersonDto;
 import HospitalManagement.com.HospitalMAnagement.model.ConsultationSchedulingModel;
 import HospitalManagement.com.HospitalMAnagement.model.PersonModel;
 import HospitalManagement.com.HospitalMAnagement.repository.ConsultationSchedulingRepository;
@@ -49,25 +50,52 @@ public class ConsultationSchedulingServiceImpl implements ConsultationScheduling
     @Override
     public void updateConsultationScheduling( ConsultationSchedulingDto consultationSchedulingDto ) {
         Optional<ConsultationSchedulingModel> foundConsultation = consultationrepository.findById(consultationSchedulingDto.getId());
-        if(foundConsultation.isPresent()){
+        if (foundConsultation.isPresent()) {
             ConsultationSchedulingModel consultationSchedulingModel = foundConsultation.get();
             consultationSchedulingModel.setSchedulingDate(consultationSchedulingDto.getSchedulingDate());
+
+            PersonDto doctorDto = consultationSchedulingDto.getDoctor();
+            Optional<PersonModel> foundDoctor = personRepository.findById(doctorDto.getId());
+            if (foundDoctor.isPresent()) {
+                consultationSchedulingModel.setDoctor(foundDoctor.get());
+            }
+
+            PersonDto pacientDto = consultationSchedulingDto.getPacient();
+            Optional<PersonModel> foundPacient = personRepository.findById(pacientDto.getId());
+            if (foundPacient.isPresent()) {
+                consultationSchedulingModel.setPacient(foundPacient.get());
+            }
+
             consultationrepository.saveAndFlush(consultationSchedulingModel);
         }
     }
 
     @Override
     public void deleteConsultationScheduling( Long id ) {
-       consultationrepository.deleteById(id);
+        consultationrepository.deleteById(id);
 
     }
 
     @Override
-    public void addConsultationScheduling( ConsultationSchedulingDto newConsultationScheduling ) {
-        ConsultationSchedulingModel consultationSchedulingModel = new ConsultationSchedulingModel();
-        consultationSchedulingModel.setId(newConsultationScheduling.getId());
-        consultationSchedulingModel.setSchedulingDate(newConsultationScheduling.getSchedulingDate());
-        consultationrepository.save(consultationSchedulingModel);
+    public void addConsultationScheduling( ConsultationSchedulingDto consultationSchedulingDto ) {
+        ConsultationSchedulingModel newConsultationSchedulingModel = new ConsultationSchedulingModel();
+
+        newConsultationSchedulingModel.setSchedulingDate(consultationSchedulingDto.getSchedulingDate());
+
+        PersonDto doctorDto = consultationSchedulingDto.getDoctor();
+        Optional<PersonModel> foundDoctor = personRepository.findById(doctorDto.getId());
+        PersonDto pacientDto = consultationSchedulingDto.getDoctor();
+        Optional<PersonModel> foundPacient = personRepository.findById(pacientDto.getId());
+
+        if (foundDoctor.isPresent()) {
+            newConsultationSchedulingModel.setDoctor(foundDoctor.get());
+        }
+
+        if (foundPacient.isPresent()) {
+            newConsultationSchedulingModel.setPacient(foundPacient.get());
+        }
+
+        consultationrepository.save(newConsultationSchedulingModel);
 
     }
 

@@ -20,8 +20,8 @@ public class PersonDto {
     private String userName;
     private String password;
     private AddressDto addressDto;
-    private List<ConsultationSchedulingDto> doctorConsultationSchedulingDtoList = new ArrayList<>();
-    private List<ConsultationSchedulingDto> pacientConsultationSchedulingDtoList = new ArrayList<>();
+    private List<ConsultationSchedulingDto> doctorConsultationList;
+    private List<ConsultationSchedulingDto> pacientConsultationList;
 
     public long getId() {
         return id;
@@ -85,5 +85,21 @@ public class PersonDto {
 
     public void setAddressDto(AddressDto addressDto) {
         this.addressDto = addressDto;
+    }
+
+    public List<ConsultationSchedulingDto> getDoctorConsultationList() {
+        return doctorConsultationList;
+    }
+
+    public void setDoctorConsultationList( List<ConsultationSchedulingDto> doctorConsultationList ) {
+        this.doctorConsultationList = doctorConsultationList;
+    }
+
+    public List<ConsultationSchedulingDto> getPacientConsultationList() {
+        return pacientConsultationList;
+    }
+
+    public void setPacientConsultationList( List<ConsultationSchedulingDto> pacientConsultationList ) {
+        this.pacientConsultationList = pacientConsultationList;
     }
 }
