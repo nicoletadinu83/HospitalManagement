@@ -9,8 +9,8 @@ public class ConsultationSchedulingDto {
     private long id;
     private Date schedulingDate;
     private List<MedicalServiceDto> medicalServiceDtoList = new ArrayList<>();
-    private List<PersonDto> doctorsList = new ArrayList<>();
-    private List<PersonDto> pacientsList = new ArrayList<>();
+    private PersonDto doctor;
+    private PersonDto pacient;
 
     public long getId() {
         return id;
@@ -36,19 +36,19 @@ public class ConsultationSchedulingDto {
         this.medicalServiceDtoList = medicalServiceDtoList;
     }
 
-    public List<PersonDto> getDoctorsList() {
-        return doctorsList;
+    public PersonDto getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorsList( List<PersonDto> doctorsList ) {
-        this.doctorsList = doctorsList;
+    public void setDoctor( PersonDto doctor ) {
+        this.doctor = doctor;
     }
 
-    public List<PersonDto> getPacientsList() {
-        return pacientsList;
+    public PersonDto getPacient() {
+        return pacient;
     }
 
-    public void setPacientsList( List<PersonDto> pacientsList ) {
-        this.pacientsList = pacientsList;
+    public void setPacient( PersonDto pacient ) {
+        this.pacient = pacient;
     }
 }
